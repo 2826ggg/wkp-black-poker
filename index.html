@@ -1,856 +1,138 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!-- 黑金封面 -->
 
-<head>
+<div class="cover">
 
-<meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<div class="cover-bg"></div>
 
-<title>WKP BLACK SERIES</title>
 
-
-<style>
-
-
-*{
-box-sizing:border-box;
-}
-
-
-body{
-
-margin:0;
-
-background:#050505;
-
-color:white;
-
-font-family:
-
-Arial,
-"Microsoft YaHei";
-
-}
-
-
-
-.nav{
-
-
-height:75px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:0 30px;
-
-border-bottom:1px solid #5c4310;
-
-background:#000;
-
-
-}
-
-
-
-.logo{
-
-font-size:28px;
-
-font-weight:bold;
-
-color:#e8bd55;
-
-
-}
-
-
-
-.lang button{
-
-
-background:#000;
-
-color:white;
-
-border:1px solid #80621c;
-
-padding:10px 25px;
-
-margin-left:10px;
-
-border-radius:5px;
-
-
-}
-
-
-
-
-/* ===== 封面 ===== */
-
-
-.hero{
-
-
-height:590px;
-
-background:
-
-linear-gradient(
-90deg,
-rgba(0,0,0,.5),
-rgba(0,0,0,.2)
-),
-
-url("/cover.jpg");
-
-
-background-size:cover;
-
-background-position:center;
-
-
-display:flex;
-
-align-items:center;
-
-padding-left:70px;
-
-
-}
-
-
-
-.hero-content{
-
-
-max-width:500px;
-
-
-}
-
-
-
-.hero h1{
-
-
-font-size:75px;
-
-line-height:1;
-
-color:#d9a936;
-
-margin:0;
-
-
-}
-
-
-
-.hero h2{
-
-
-font-size:55px;
-
-margin:10px 0;
-
-color:#d9a936;
-
-
-}
-
-
-
-.hero p{
-
-
-font-size:26px;
-
-
-}
-
-
-
-.gold{
-
-
-color:#e5b94c;
-
-
-}
-
-
-
-.join{
-
-
-background:#e8bd55;
-
-border:none;
-
-padding:18px 55px;
-
-font-size:22px;
-
-cursor:pointer;
-
-margin-top:30px;
-
-}
-
-
-
-
-
-/*赛事*/
-
-
-.container{
-
-
-padding:50px 8%;
-
-
-}
-
-
-
-.title{
-
-
-font-size:32px;
-
-color:#e8bd55;
-
-
-}
-
-
-
-.cards{
-
-
-display:flex;
-
-gap:20px;
-
-
-}
-
-
-
-.card{
-
-
-flex:1;
-
-background:#111;
-
-border:1px solid #80621c;
-
-padding:25px;
-
-border-radius:8px;
-
-
-}
-
-
-
-.card h3{
-
-
-color:#e8bd55;
-
-
-}
-
-
-
-
-
-/*报名*/
-
-
-.signup{
-
-
-margin-top:40px;
-
-background:#080808;
-
-border:1px solid #80621c;
-
-padding:40px;
-
-border-radius:10px;
-
-
-}
-
-
-
-.signup h2{
-
-
-text-align:center;
-
-font-size:35px;
-
-color:#e8bd55;
-
-
-}
-
-
-
-label{
-
-
-display:block;
-
-margin-top:18px;
-
-
-}
-
-
-
-input,
-select{
-
-
-width:100%;
-
-padding:15px;
-
-background:#000;
-
-border:1px solid #80621c;
-
-color:white;
-
-margin-top:8px;
-
-
-}
-
-
-
-.submit{
-
-
-width:100%;
-
-margin-top:30px;
-
-padding:18px;
-
-background:#e8bd55;
-
-border:none;
-
-font-size:20px;
-
-
-}
-
-
-
-
-
-footer{
-
-
-text-align:center;
-
-padding:30px;
-
-border-top:1px solid #333;
-
-color:#999;
-
-
-}
-
-
-
-
-
-@media(max-width:700px){
-
-
-.hero{
-
-height:500px;
-
-padding-left:25px;
-
-}
-
-
-.hero h1{
-
-font-size:45px;
-
-}
-
-
-
-.hero h2{
-
-font-size:35px;
-
-}
-
-
-
-.cards{
-
-
-display:block;
-
-
-}
-
-
-.card{
-
-
-margin-bottom:15px;
-
-
-}
-
-
-
-}
-
-
-
-
-</style>
-
-
-</head>
-
-
-
-<body>
-
-
-
-
-<!-- 导航 -->
-
-<div class="nav">
-
-
-<div class="logo">
-
-WKP BLACK SERIES
-
-</div>
-
-
-
-<div>
-
-
-<button onclick="setLang('zh')">
-中文
-</button>
-
-
-<button onclick="setLang('en')">
-EN
-</button>
-
-
-<button onclick="setLang('jp')">
-日本語
-</button>
-
-
-<button onclick="setLang('kr')">
-한국어
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<!-- 封面 -->
-
-
-<section class="hero">
-
-
-<div class="hero-content">
+<div class="cover-content">
 
 
 <h1>
-
-WKP
-
+WKP BLACK SERIES
 </h1>
 
 
-<h2>
-
-BLACK SERIES
-
-</h2>
-
-
-<p id="desc">
-
-全球黑金德州扑克赛事平台
-
+<p id="coverText">
+GLOBAL POKER TOURNAMENT
 </p>
 
 
-<p class="gold">
-
-高端赛事 · 全球玩家 · VIP系统
-
-</p>
-
-
-
-<button class="join"
-onclick="goForm()">
-
+<button onclick="scrollToSignup()">
 立即报名
-
 </button>
 
 
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<div class="container">
-
-
-
-<h2 class="title">
-
-🔥 即将赛事
-
-</h2>
-
-
-
-
-<div class="cards">
-
-
-<div class="card">
-
-<h3>
-
-🏆 WKP Black Series
-
-</h3>
-
-<p>
-全球顶级扑克赛事
-</p>
-
-<p>
-高额奖金 · 精英对决
-</p>
-
-
-</div>
-
-
-
-
-<div class="card">
-
-<h3>
-
-👑 VIP Championship
-
-</h3>
-
-<p>
-
-VIP专属锦标赛
-
-</p>
-
-<p>
-
-尊享特权 · 荣耀之战
-
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h3>
-
-🌍 Online Tournament
-
-</h3>
-
-<p>
-
-线上扑克公开赛
-
-</p>
-
-<p>
-
-全球同步
-
-</p>
-
-
 </div>
 
 
 </div>
-
-
-
-
-
-
-
-<div class="signup" id="signup">
-
-
-<h2>
-
-📝 立即报名
-
-</h2>
-
-
-
-
-<form id="form">
-
-
-<label>
-
-姓名
-
-</label>
-
-
-<input required placeholder="请输入您的姓名">
-
-
-
-<label>
-
-手机号
-
-</label>
-
-
-<input required placeholder="请输入手机号">
-
-
-
-<label>
-
-邮箱
-
-</label>
-
-
-<input placeholder="请输入邮箱">
-
-
-
-<label>
-
-国家/地区
-
-</label>
-
-
-<select>
-
-
-<option>
-
-中国
-
-</option>
-
-
-<option>
-
-日本
-
-</option>
-
-
-<option>
-
-韩国
-
-</option>
-
-
-<option>
-
-美国
-
-</option>
-
-
-</select>
-
-
-
-
-
-<label>
-
-赛事
-
-</label>
-
-
-<select>
-
-
-<option>
-
-WKP Black Series
-
-</option>
-
-
-<option>
-
-VIP Championship
-
-</option>
-
-
-</select>
-
-
-
-
-<button class="submit">
-
-提交报名
-
-</button>
-
-
-
-</form>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<footer>
-
-© 2026 WKP BLACK SERIES. All Rights Reserved.
-
-</footer>
-
-
-
-
-
-
-
 <script>
-
-
-function goForm(){
-
-
-document
-.getElementById("signup")
-.scrollIntoView();
-
-
+async function detectByIP() {
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const data = await res.json();
+    return data.country_code;
+  } catch (e) {
+    return null;
+  }
 }
 
+function mapCountryToLang(country) {
+  switch (country) {
+    case "CN":
+    case "TW":
+    case "HK":
+      return "zh";
 
+    case "JP":
+      return "jp";
 
+    case "KR":
+      return "kr";
 
-const text={
-
-
-zh:"全球黑金德州扑克赛事平台",
-
-
-en:"Global Black Poker Tournament Platform",
-
-
-jp:"グローバルポーカー大会",
-
-
-kr:"글로벌 포커 토너먼트"
-
-
+    case "US":
+    case "GB":
+    default:
+      return "en";
+  }
 }
 
+window.onload = async function () {
+  const country = await detectByIP();
 
+  let lang;
 
-function setLang(lang){
+  if (country) {
+    lang = mapCountryToLang(country);
+  } else {
+    const browserLang = navigator.language;
 
+    if (browserLang.startsWith("zh")) lang = "zh";
+    else if (browserLang.startsWith("ja")) lang = "jp";
+    else if (browserLang.startsWith("ko")) lang = "kr";
+    else lang = "en";
+  }
 
-document
-.getElementById("desc")
-.innerText=text[lang];
-
-
+  setLang(lang);
+};
+let time = "08:30";
+let date = "2026/06/22";
+body 
+  background: 
+  background-image ("/cover.png");
+  background-size
+  background-positioncenter 
+  background-repeatno-repeat;
+  min-height 
+  // 把时间和日期显示到页面上（假设你有对应的 HTML 元素）
+document.getElementById("current-time").textContent = time;
+document.getElementById("current-date").textContent = date;
+<div class="datetime">
+  <span id="current-date"></span> <span id="current-time"></span>
+</div>
+function updateDateTime() {
+  const now = new Date();
+  // 格式化时间：08:30
+  const timeStr = now.toTimeString().slice(0, 5);
+  // 格式化日期：2024/06/22
+  const dateStr = now.toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).replace(/\//g, "/");
+  
+  document.getElementById("current-time").textContent = timeStr;
+  document.getElementById("current-date").textContent = dateStr;
 }
 
+// 页面加载时执行一次
+updateDateTime();
+// 每分钟更新一次
+setInterval(updateDateTime, 60000);
+// 在你的 payI18n 里加语言包
+const payI18n = {
+  zh: {
+    // ...其他文案
+    datetime: "当前时间："
+  },
+  en: {
+    // ...其他文案
+    datetime: "Current Time: "
+  },
+  jp: {
+    // ...其他文案
+    datetime: "現在時刻："
+  }
+};
 
-</script>
-
-
-
-</body>
-
+// 在 setPayLang 里更新
+function setPayLang(lang) {
+  // ...原有逻辑
+  document.getElementById("datetime-label").textContent = payI18n[lang].datetime;
+}
+<div class="datetime">
+  <span id="datetime-label"></span>
+  <span id="current-date"></span> <span id="current-time"></span>
+</div>
