@@ -216,13 +216,8 @@
         headers:{ "Content-Type":"application/json" },
         body: JSON.stringify(user)
       });
-      alert("报名成功");
-      window.location.href = "payment.html";
-    });
-    // 自动启动
-    detectIPLanguage().then(lang => {
-      setLang(lang);
-    });
-  </script>
-</body>
-</html>
+    alert("报名成功，正在进入支付页面");
+
+
+window.location.href =
+"payment.html";
