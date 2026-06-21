@@ -1,805 +1,228 @@
-// 🌍 IP自动识别国家语言
-
-
-async function detectIPLanguage(){
-
-
-try{
-
-
-// 获取IP国家
-
-let res = await fetch(
-"https://ipapi.co/json/"
-);
-
-
-let data = await res.json();
-
-
-
-let country = data.country_code;
-
-
-
-console.log(
-"当前国家:",
-country
-);
-
-
-
-// 国家对应语言
-
-
-switch(country){
-
-
-
-// 中国
-
-case "CN":
-
-return "zh";
-
-
-
-// 台湾
-
-case "TW":
-
-return "zh";
-
-
-
-// 香港
-
-case "HK":
-
-return "zh";
-
-
-
-// 日本
-
-case "JP":
-
-return "jp";
-
-
-
-// 韩国
-
-case "KR":
-
-return "kr";
-
-
-
-// 美国
-
-case "US":
-
-return "en";
-
-
-
-// 英国
-
-case "GB":
-
-return "en";
-
-
-
-// 默认英文
-
-default:
-
-return "en";
-
-
-}
-
-
-
-}catch(error){
-
-
-console.log(
-"IP识别失败",
-error
-);
-
-
-// 失败使用浏览器语言
-
-let lang =
-navigator.language.toLowerCase();
-
-
-
-if(lang.includes("zh"))
-
-return "zh";
-
-
-if(lang.includes("ja"))
-
-return "jp";
-
-
-return "en";
-
-
-}
-
-
-
-}
-
-
-
-
-// 启动自动语言
-
-detectIPLanguage()
-.then(lang=>{
-
-setLang(lang);
-
-});
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>WKP Black Poker</title>
-
-
-<style>
-
-body{
-
-margin:0;
-
-font-family:Arial;
-
-background:#000;
-
-color:white;
-
-}
-
-
-.nav{
-
-display:flex;
-
-justify-content:space-between;
-
-padding:15px;
-
-border-bottom:1px solid #333;
-
-}
-
-
-.logo{
-
-color:gold;
-
-font-weight:bold;
-
-}
-
-
-.lang button{
-
-margin-left:5px;
-
-background:#111;
-
-color:white;
-
-border:1px solid #555;
-
-padding:6px;
-
-}
-
-
-
-.hero{
-
-text-align:center;
-
-padding:40px 15px;
-
-}
-
-
-.hero h1{
-
-color:gold;
-
-}
-
-
-
-.section{
-
-padding:20px;
-
-}
-
-
-
-.card{
-
-background:#111;
-
-border:1px solid #333;
-
-padding:15px;
-
-margin:10px 0;
-
-}
-
-
-
-
-.signup-box{
-
-background:#111;
-
-padding:20px;
-
-margin:20px;
-
-border-radius:10px;
-
-border:1px solid #333;
-
-}
-
-
-
-.signup-box h2{
-
-color:gold;
-
-text-align:center;
-
-}
-
-
-
-label{
-
-display:block;
-
-margin-top:15px;
-
-color:#aaa;
-
-}
-
-
-
-input,
-select{
-
-
-width:100%;
-
-padding:12px;
-
-margin-top:8px;
-
-background:#000;
-
-color:white;
-
-border:1px solid #555;
-
-box-sizing:border-box;
-
-}
-
-
-
-button.submit{
-
-
-width:100%;
-
-margin-top:20px;
-
-padding:15px;
-
-background:gold;
-
-border:none;
-
-font-weight:bold;
-
-font-size:16px;
-
-}
-
-
-
-</style>
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WKP Black Poker</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#000;
+      color:white;
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      padding:15px;
+      border-bottom:1px solid #333;
+    }
+    .logo{
+      color:gold;
+      font-weight:bold;
+    }
+    .lang button{
+      margin-left:5px;
+      background:#111;
+      color:white;
+      border:1px solid #555;
+      padding:6px;
+    }
+    .hero{
+      text-align:center;
+      padding:40px 15px;
+    }
+    .hero h1{
+      color:gold;
+    }
+    .section{
+      padding:20px;
+    }
+    .card{
+      background:#111;
+      border:1px solid #333;
+      padding:15px;
+      margin:10px 0;
+    }
+    .signup-box{
+      background:#111;
+      padding:20px;
+      margin:20px;
+      border-radius:10px;
+      border:1px solid #333;
+    }
+    .signup-box h2{
+      color:gold;
+      text-align:center;
+    }
+    label{
+      display:block;
+      margin-top:15px;
+      color:#aaa;
+    }
+    input, select{
+      width:100%;
+      padding:12px;
+      margin-top:8px;
+      background:#000;
+      color:white;
+      border:1px solid #555;
+      box-sizing:border-box;
+    }
+    button.submit{
+      width:100%;
+      margin-top:20px;
+      padding:15px;
+      background:gold;
+      border:none;
+      font-weight:bold;
+      font-size:16px;
+    }
+  </style>
 </head>
-
-
 <body>
-
-
-
-<div class="nav">
-
-
-<div class="logo">
-
-WKP BLACK SERIES
-
-</div>
-
-
-<div class="lang">
-
-<button onclick="setLang('zh')">
-中文
-</button>
-
-
-<button onclick="setLang('en')">
-EN
-</button>
-
-
-<button onclick="setLang('jp')">
-日本語
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="hero">
-
-
-<h1 id="title"></h1>
-
-<p id="desc"></p>
-
-
-</div>
-
-
-
-
-
-<div class="section">
-
-
-<h3 id="eventTitle"></h3>
-
-
-<div class="card">
-
-WKP Black Series
-
-</div>
-
-
-<div class="card">
-
-VIP Championship
-
-</div>
-
-
-<div class="card">
-
-Online Tournament
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<!-- 报名 -->
-
-<div class="signup-box">
-
-
-<h2>
-📝 <span id="formTitle"></span>
-</h2>
-
-
-<form id="signupForm">
-
-
-
-<label>
-姓名
-</label>
-
-
-<input
-
-id="name"
-
-placeholder="姓名"
-
-required>
-
-
-
-<label>
-手机号
-</label>
-
-
-<input
-
-id="phone"
-
-placeholder="手机号"
-
-required>
-
-
-
-<label>
-邮箱
-</label>
-
-
-<input
-
-id="email"
-
-type="email"
-
-placeholder="邮箱"
-
-required>
-
-
-
-
-<label>
-国家/地区
-</label>
-
-
-<select id="country">
-
-
-<option>
-中国
-</option>
-
-
-<option>
-日本
-</option>
-
-
-<option>
-台湾
-</option>
-
-
-<option>
-美国
-</option>
-
-
-</select>
-
-
-
-
-<label>
-赛事
-</label>
-
-
-<select id="event">
-
-
-<option>
-WKP Black Series
-</option>
-
-
-<option>
-VIP Championship
-</option>
-
-
-<option>
-Online Tournament
-</option>
-
-
-</select>
-
-
-
-
-<button
-
-class="submit"
-
-type="submit">
-
-
-提交报名
-
-
-</button>
-
-
-
-</form>
-
-
-
-</div>
-
-
-
-
-
-
-<script>
-
-
-// 多语言
-
-const i18n={
-
-
-zh:{
-
-title:"全球黑金德州扑克赛事平台",
-
-desc:"高端赛事 · 全球玩家 · VIP系统",
-
-event:"🔥 即将赛事",
-
-form:"立即报名"
-
-
-},
-
-
-
-en:{
-
-
-title:"Global Black Poker Tournament",
-
-desc:"Global Events · VIP System",
-
-event:"🔥 Events",
-
-form:"Register"
-
-
-},
-
-
-
-jp:{
-
-
-title:"グローバルポーカー大会",
-
-desc:"世界大会 · VIPシステム",
-
-event:"🔥 大会",
-
-form:"参加登録"
-
-
-}
-
-
-
-};
-
-
-
-
-
-function setLang(lang){
-
-
-let t=i18n[lang];
-
-
-document.getElementById("title")
-.innerText=t.title;
-
-
-
-document.getElementById("desc")
-.innerText=t.desc;
-
-
-
-document.getElementById("eventTitle")
-.innerText=t.event;
-
-
-
-document.getElementById("formTitle")
-.innerText=t.form;
-
-
-
-}
-
-
-
-
-
-// 自动识别语言
-
-
-function detectLanguage(){
-
-
-let lang=navigator.language.toLowerCase();
-
-
-if(lang.includes("zh"))
-
-return "zh";
-
-
-if(lang.includes("ja"))
-
-return "jp";
-
-
-return "en";
-
-
-}
-
-
-setLang(detectLanguage());
-
-
-
-
-
-
-// 提交报名
-
-
-document
-.getElementById("signupForm")
-.addEventListener(
-"submit",
-function(e){
-
-
-e.preventDefault();
-
-
-
-let user={
-
-
-name:
-document.getElementById("name").value,
-
-
-phone:
-document.getElementById("phone").value,
-
-
-email:
-document.getElementById("email").value,
-
-
-country:
-document.getElementById("country").value,
-
-
-event:
-document.getElementById("event").value,
-
-
-time:
-new Date().toLocaleString()
-
-
-};
-
-
-
-
-console.log(user);
-
-
-
-
-// 发送后台
-
-fetch(
-"http://localhost:3000/api/signup",
-{
-
-
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":"application/json"
-
-
-},
-
-
-body:
-
-JSON.stringify(user)
-
-
-
-}
-
-);
-
-
-
-
-alert("报名成功");
-
-
-window.location.href="payment.html";
-
-
-
-});
-
-
-
-</script>
-
-
-
+  <div class="nav">
+    <div class="logo">WKP BLACK SERIES</div>
+    <div class="lang">
+      <button onclick="setLang('zh')">中文</button>
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('jp')">日本語</button>
+    </div>
+  </div>
+  <div class="hero">
+    <h1 id="title"></h1>
+    <p id="desc"></p>
+  </div>
+  <div class="section">
+    <h3 id="eventTitle"></h3>
+    <div class="card">WKP Black Series</div>
+    <div class="card">VIP Championship</div>
+    <div class="card">Online Tournament</div>
+  </div>
+  <!-- 报名 -->
+  <div class="signup-box">
+    <h2>📝 <span id="formTitle"></span></h2>
+    <form id="signupForm">
+      <label>姓名</label>
+      <input id="name" placeholder="姓名" required>
+      <label>手机号</label>
+      <input id="phone" placeholder="手机号" required>
+      <label>邮箱</label>
+      <input id="email" type="email" placeholder="邮箱" required>
+      <label>国家/地区</label>
+      <select id="country">
+        <option>中国</option>
+        <option>日本</option>
+        <option>台湾</option>
+        <option>美国</option>
+      </select>
+      <label>赛事</label>
+      <select id="event">
+        <option>WKP Black Series</option>
+        <option>VIP Championship</option>
+        <option>Online Tournament</option>
+      </select>
+      <button class="submit" type="submit">提交报名</button>
+    </form>
+  </div>
+  <script>
+    // 🌍 IP自动识别国家语言（全球版）
+    async function detectIPLanguage(){
+      try{
+        let res = await fetch("https://ipapi.co/json/");
+        let data = await res.json();
+        const country = data.country_code;
+        console.log("IP国家:", country);
+
+        // 国家对应语言
+        const languageMap = {
+          // 中文区域
+          CN:"zh", TW:"zh", HK:"zh", MO:"zh",
+          // 日本
+          JP:"jp",
+          // 韩国
+          KR:"kr",
+          // 英语国家
+          US:"en", GB:"en", CA:"en", AU:"en", NZ:"en", IE:"en", SG:"en", IN:"en", PH:"en", ZA:"en",
+          // 欧洲
+          DE:"de", FR:"fr", ES:"es", IT:"it", PT:"pt", NL:"nl", BE:"nl", CH:"de", AT:"de", SE:"sv", NO:"no", DK:"da", FI:"fi", PL:"pl", CZ:"cs", GR:"el",
+          // 东南亚
+          TH:"th", VN:"vi", MY:"ms", ID:"id", KH:"km",
+          // 中东
+          AE:"ar", SA:"ar", QA:"ar", TR:"tr",
+          // 俄罗斯
+          RU:"ru",
+          // 巴西
+          BR:"pt",
+          // 墨西哥
+          MX:"es",
+          // 默认
+          default:"en"
+        };
+        return languageMap[country] || languageMap.default;
+      }catch(error){
+        console.log("IP检测失败", error);
+        // 失败使用浏览器语言
+        let lang = navigator.language.toLowerCase();
+        if(lang.includes("zh")) return "zh";
+        if(lang.includes("ja")) return "jp";
+        if(lang.includes("ko")) return "kr";
+        return "en";
+      }
+    }
+    // 多语言
+    const i18n={
+      zh:{
+        title:"全球黑金德州扑克赛事平台",
+        desc:"高端赛事 · 全球玩家 · VIP系统",
+        event:"🔥 即将赛事",
+        form:"立即报名"
+      },
+      en:{
+        title:"Global Black Poker Tournament",
+        desc:"Global Events · VIP System",
+        event:"🔥 Events",
+        form:"Register"
+      },
+      jp:{
+        title:"グローバルポーカー大会",
+        desc:"世界大会 · VIPシステム",
+        event:"🔥 大会",
+        form:"参加登録"
+      }
+    };
+    function setLang(lang){
+      let t = i18n[lang] || i18n.zh;
+      document.getElementById("title").innerText = t.title;
+      document.getElementById("desc").innerText = t.desc;
+      document.getElementById("eventTitle").innerText = t.event;
+      document.getElementById("formTitle").innerText = t.form;
+    }
+    // 提交报名
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let user = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        country: document.getElementById("country").value,
+        event: document.getElementById("event").value,
+        time: new Date().toLocaleString()
+      };
+      console.log(user);
+      // 发送后台（可替换为你的接口地址）
+      fetch("http://localhost:3000/api/signup", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(user)
+      });
+      alert("报名成功");
+      window.location.href = "payment.html";
+    });
+    // 自动启动
+    detectIPLanguage().then(lang => {
+      setLang(lang);
+    });
+  </script>
 </body>
-
 </html>
