@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDT 支付</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #0f1419;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .payment-card {
+      background: #1a1f2e;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #22c55e;
+    }
+    .order-info {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #252d3d;
+      border-radius: 8px;
+    }
+    .order-info p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .usdt-address {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #252d3d;
+      border-radius: 8px;
+    }
+    .address-label {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+    .address {
+      font-family: monospace;
+      font-size: 0.85rem;
+      word-break: break-all;
+      color: #22c55e;
+      background: #1a1f2e;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin: 0.5rem 0;
+    }
+    .copy-btn {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: #2563eb;
+    }
+    .tip {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .status {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #252d3d;
+      border-radius: 8px;
+    }
+    .status.pending {
+      color: #f59e0b;
+    }
+    .status.success {
+      color: #22c55e;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-card">
+    <h1>💰 USDT 支付</h1>
+    <div class="order-info">
+      <p>订单号：<span id="orderId">WKPPKR20260621001</span></p>
+      <p>支付金额：<span id="amount">50.00</span> USDT</p>
+      <p>链类型：TRC20（推荐，手续费低）</p>
+    </div>
+    <div class="usdt-address">
+      <div class="address-label">收款地址（TRC20）：</div>
+      <div class="address" id="usdtAddr">TxxxxxxYourUSDTAddressHerexxxxxx</div>
+      <button class="copy-btn" onclick="copyAddress()">复制地址</button>
+    </div>
+    <div class="tip">
+      请向以上地址转账指定金额，转账完成后系统将自动确认。
+    </div>
+    <div class="status pending" id="paymentStatus">
+      等待支付确认...
+    </div>
+  </div>
+
+  <script>
+    // 复制地址功能
+    function copyAddress() {
+      const addr = document.getElementById('usdtAddr').textContent;
+      navigator.clipboard.writeText(addr).then(() => {
+        alert('地址已复制！');
+      });
+    }
+
+    // 轮询查询支付状态（实际项目中对接区块链 API）
+    let checkInterval = setInterval(() => {
+      // 这里替换为真实的支付状态查询接口
+      const mockSuccess = Math.random() > 0.8; //  20% 概率支付成功
+      if (mockSuccess) {
+        document.getElementById('paymentStatus').textContent = '✅ 支付成功！';
+        document.getElementById('paymentStatus').classList.remove('pending');
+        document.getElementById('paymentStatus').classList.add('success');
+        clearInterval(checkInterval);
+        // 支付成功后跳转到结果页
+        setTimeout(() => {
+          window.location.href = '/payment-success.html';
+        }, 2000);
+      }
+    }, 5000); // 每 5 秒查询一次
+  </script>
+</body>
+</html>
