@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WKP Black Poker</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #000;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  color: gold;
+  font-weight: bold;
+}
+
+.lang button {
+  margin-left: 5px;
+  background: #111;
+  color: white;
+  border: 1px solid #333;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 15px;
+}
+
+.hero h1 { color: gold; }
+
+.section { padding: 20px; }
+
+.card {
+  background: #111;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #333;
+}
+
+form {
+  background: #111;
+  padding: 15px;
+  border: 1px solid #333;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  background: #000;
+  color: white;
+  border: 1px solid #333;
+}
+
+button.submit {
+  width: 100%;
+  padding: 12px;
+  background: gold;
+  border: none;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="logo">WKP BLACK SERIES</div>
+
+  <div class="lang">
+    <button onclick="setLang('zh')">中文</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('jp')">日本語</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1 id="title"></h1>
+  <p id="desc"></p>
+</div>
+
+<div class="section">
+  <h3 id="eventTitle"></h3>
+
+  <div class="card" id="c1"></div>
+  <div class="card" id="c2"></div>
+  <div class="card" id="c3"></div>
+</div>
+
+<div class="section">
+  <h3 id="formTitle"></h3>
+
+  <form onsubmit="submitForm(event)">
+    <input id="name" placeholder="" required>
+    <input id="contact" placeholder="" required>
+
+    <select>
+      <option>Region</option>
+      <option>Asia</option>
+      <option>Europe</option>
+      <option>America</option>
+    </select>
+
+    <button class="submit" id="submitBtn"></button>
+  </form>
+</div>
+
+<script>
+const i18n = {
+  zh: {
+    title: "全球黑金德州扑克赛事平台",
+    desc: "高端赛事 · 全球玩家 · VIP系统",
+    event: "🔥 即将赛事",
+    c1: "全国公开赛 · ￥500",
+    c2: "黑金VIP系列 · ￥1000",
+    c3: "线上锦标赛 · ￥300",
+    form: "🧾 立即报名",
+    name: "姓名",
+    contact: "联系方式",
+    submit: "提交报名"
+  },
+  en: {
+    title: "Global Black Poker Tournament",
+    desc: "High-end events · Global players · VIP system",
+    event: "🔥 Upcoming Events",
+    c1: "National Open · $500",
+    c2: "Black VIP Series · $1000",
+    c3: "Online Championship · $300",
+    form: "🧾 Register Now",
+    name: "Name",
+    contact: "Contact",
+    submit: "Submit"
+  },
+  jp: {
+    title: "グローバルポーカートーナメント",
+    desc: "ハイエンド大会 · VIPシステム",
+    event: "🔥 大会情報",
+    c1: "全国大会 · 500ドル",
+    c2: "VIPシリーズ · 1000ドル",
+    c3: "オンライン大会 · 300ドル",
+    form: "🧾 参加登録",
+    name: "名前",
+    contact: "連絡先",
+    submit: "登録"
+  }
+};
+
+function setLang(lang){
+  const t = i18n[lang];
+
+  document.getElementById("title").innerText = t.title;
+  document.getElementById("desc").innerText = t.desc;
+  document.getElementById("eventTitle").innerText = t.event;
+
+  document.getElementById("c1").innerText = t.c1;
+  document.getElementById("c2").innerText = t.c2;
+  document.getElementById("c3").innerText = t.c3;
+
+  document.getElementById("formTitle").innerText = t.form;
+
+  document.getElementById("name").placeholder = t.name;
+  document.getElementById("contact").placeholder = t.contact;
+  document.getElementById("submitBtn").innerText = t.submit;
+}
+
+/* 🌍 自动识别语言 */
+function detectLanguage(){
+
+  // 1. 浏览器语言
+  const lang = navigator.language.toLowerCase();
+
+  if(lang.includes("zh")) return "zh";
+  if(lang.includes("ja")) return "jp";
+  if(lang.includes("en")) return "en";
+
+  return "en";
+}
+
+setLang(detectLanguage());
+
+function submitForm(e){
+  e.preventDefault();
+  alert("报名成功 / Submitted");
+}
+</script>
+
+</body>
+</html>
