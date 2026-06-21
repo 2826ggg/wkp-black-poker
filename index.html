@@ -5,22 +5,31 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>WKP Black Series</title>
+<title>WKP BLACK SERIES</title>
 
 
 <style>
+
+
+*{
+box-sizing:border-box;
+}
+
 
 body{
 
 margin:0;
 
-background:#000;
+background:#050505;
 
 color:white;
 
-font-family:Arial;
+font-family:
+
+Arial,
+"Microsoft YaHei";
 
 }
 
@@ -28,13 +37,21 @@ font-family:Arial;
 
 .nav{
 
+
+height:75px;
+
 display:flex;
+
+align-items:center;
 
 justify-content:space-between;
 
-padding:15px;
+padding:0 30px;
 
-border-bottom:1px solid #333;
+border-bottom:1px solid #5c4310;
+
+background:#000;
+
 
 }
 
@@ -42,9 +59,12 @@ border-bottom:1px solid #333;
 
 .logo{
 
-color:gold;
+font-size:28px;
 
 font-weight:bold;
+
+color:#e8bd55;
+
 
 }
 
@@ -52,111 +72,173 @@ font-weight:bold;
 
 .lang button{
 
-background:#111;
+
+background:#000;
 
 color:white;
 
-border:1px solid gold;
+border:1px solid #80621c;
 
-padding:6px;
+padding:10px 25px;
 
-margin-left:5px;
+margin-left:10px;
 
-}
-
-
-
-/* 黑金封面 */
-
-
-.cover{
-
-height:70vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-position:relative;
+border-radius:5px;
 
 
 }
 
 
 
-.cover-bg{
+
+/* ===== 封面 ===== */
 
 
-position:absolute;
+.hero{
 
-width:100%;
 
-height:100%;
-
+height:590px;
 
 background:
 
 linear-gradient(
-rgba(0,0,0,.6),
-rgba(0,0,0,.9)
+90deg,
+rgba(0,0,0,.5),
+rgba(0,0,0,.2)
 ),
 
-url("cover.jpg");
+url("/cover.jpg");
+
 
 background-size:cover;
 
 background-position:center;
 
 
-}
+display:flex;
 
+align-items:center;
 
-
-.cover-content{
-
-position:relative;
-
-z-index:2;
+padding-left:70px;
 
 
 }
 
 
 
-.cover h1{
+.hero-content{
 
-font-size:45px;
 
-color:gold;
+max-width:500px;
 
 
 }
 
 
 
-.cover button{
+.hero h1{
 
 
-background:gold;
+font-size:75px;
 
-padding:15px 40px;
+line-height:1;
 
-border:0;
+color:#d9a936;
 
-font-weight:bold;
+margin:0;
+
+
+}
+
+
+
+.hero h2{
+
+
+font-size:55px;
+
+margin:10px 0;
+
+color:#d9a936;
+
+
+}
+
+
+
+.hero p{
+
+
+font-size:26px;
+
+
+}
+
+
+
+.gold{
+
+
+color:#e5b94c;
+
+
+}
+
+
+
+.join{
+
+
+background:#e8bd55;
+
+border:none;
+
+padding:18px 55px;
+
+font-size:22px;
+
+cursor:pointer;
+
+margin-top:30px;
 
 }
 
 
 
 
-.section{
 
-padding:20px;
+/*赛事*/
+
+
+.container{
+
+
+padding:50px 8%;
+
+
+}
+
+
+
+.title{
+
+
+font-size:32px;
+
+color:#e8bd55;
+
+
+}
+
+
+
+.cards{
+
+
+display:flex;
+
+gap:20px;
+
 
 }
 
@@ -165,30 +247,46 @@ padding:20px;
 .card{
 
 
+flex:1;
+
 background:#111;
 
-border:1px solid #333;
+border:1px solid #80621c;
 
-padding:15px;
+padding:25px;
 
-margin:10px 0;
+border-radius:8px;
 
 
 }
 
 
 
+.card h3{
+
+
+color:#e8bd55;
+
+
+}
+
+
+
+
+
 /*报名*/
 
 
-.signup-box{
+.signup{
 
 
-background:#111;
+margin-top:40px;
 
-margin:20px;
+background:#080808;
 
-padding:20px;
+border:1px solid #80621c;
+
+padding:40px;
 
 border-radius:10px;
 
@@ -197,15 +295,18 @@ border-radius:10px;
 
 
 
-.signup-box h2{
+.signup h2{
 
 
 text-align:center;
 
-color:gold;
+font-size:35px;
+
+color:#e8bd55;
 
 
 }
+
 
 
 label{
@@ -213,9 +314,7 @@ label{
 
 display:block;
 
-margin-top:15px;
-
-color:#aaa;
+margin-top:18px;
 
 
 }
@@ -228,17 +327,15 @@ select{
 
 width:100%;
 
-padding:12px;
-
-margin-top:8px;
+padding:15px;
 
 background:#000;
 
+border:1px solid #80621c;
+
 color:white;
 
-border:1px solid #555;
-
-box-sizing:border-box;
+margin-top:8px;
 
 
 }
@@ -248,24 +345,97 @@ box-sizing:border-box;
 .submit{
 
 
-margin-top:20px;
-
 width:100%;
 
-padding:15px;
+margin-top:30px;
 
-background:gold;
+padding:18px;
 
-border:0;
+background:#e8bd55;
 
-font-weight:bold;
+border:none;
+
+font-size:20px;
 
 
 }
 
 
 
+
+
+footer{
+
+
+text-align:center;
+
+padding:30px;
+
+border-top:1px solid #333;
+
+color:#999;
+
+
+}
+
+
+
+
+
+@media(max-width:700px){
+
+
+.hero{
+
+height:500px;
+
+padding-left:25px;
+
+}
+
+
+.hero h1{
+
+font-size:45px;
+
+}
+
+
+
+.hero h2{
+
+font-size:35px;
+
+}
+
+
+
+.cards{
+
+
+display:block;
+
+
+}
+
+
+.card{
+
+
+margin-bottom:15px;
+
+
+}
+
+
+
+}
+
+
+
+
 </style>
+
 
 </head>
 
@@ -274,6 +444,9 @@ font-weight:bold;
 <body>
 
 
+
+
+<!-- 导航 -->
 
 <div class="nav">
 
@@ -285,31 +458,32 @@ WKP BLACK SERIES
 </div>
 
 
-<div class="lang">
+
+<div>
 
 
 <button onclick="setLang('zh')">
-
 中文
-
 </button>
 
 
 <button onclick="setLang('en')">
-
 EN
-
 </button>
 
 
 <button onclick="setLang('jp')">
-
 日本語
+</button>
 
+
+<button onclick="setLang('kr')">
+한국어
 </button>
 
 
 </div>
+
 
 
 </div>
@@ -321,73 +495,145 @@ EN
 <!-- 封面 -->
 
 
-<div class="cover">
+<section class="hero">
 
 
-<div class="cover-bg"></div>
-
-
-<div class="cover-content">
+<div class="hero-content">
 
 
 <h1>
 
-WKP BLACK SERIES
+WKP
 
 </h1>
 
 
-<p id="coverText">
+<h2>
 
-全球黑金扑克赛事
+BLACK SERIES
+
+</h2>
+
+
+<p id="desc">
+
+全球黑金德州扑克赛事平台
 
 </p>
 
 
-<button onclick="goSignup()">
+<p class="gold">
+
+高端赛事 · 全球玩家 · VIP系统
+
+</p>
+
+
+
+<button class="join"
+onclick="goForm()">
 
 立即报名
 
 </button>
 
 
-</div>
-
 
 </div>
 
 
+</section>
 
 
 
 
-<div class="section">
 
 
-<h2 id="eventTitle">
+<div class="container">
+
+
+
+<h2 class="title">
 
 🔥 即将赛事
 
 </h2>
 
 
-<div class="card">
 
-WKP Black Series
 
-</div>
+<div class="cards">
 
 
 <div class="card">
 
-VIP Championship
+<h3>
+
+🏆 WKP Black Series
+
+</h3>
+
+<p>
+全球顶级扑克赛事
+</p>
+
+<p>
+高额奖金 · 精英对决
+</p>
+
 
 </div>
+
+
 
 
 <div class="card">
 
-Online Tournament
+<h3>
+
+👑 VIP Championship
+
+</h3>
+
+<p>
+
+VIP专属锦标赛
+
+</p>
+
+<p>
+
+尊享特权 · 荣耀之战
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>
+
+🌍 Online Tournament
+
+</h3>
+
+<p>
+
+线上扑克公开赛
+
+</p>
+
+<p>
+
+全球同步
+
+</p>
+
 
 </div>
 
@@ -399,100 +645,90 @@ Online Tournament
 
 
 
-<!--报名-->
 
-
-<div class="signup-box">
+<div class="signup" id="signup">
 
 
 <h2>
 
-📝
-
-<span id="formTitle">
-
-立即报名
-
-</span>
+📝 立即报名
 
 </h2>
 
 
 
 
-<form id="signupForm">
+<form id="form">
 
 
 <label>
+
 姓名
+
 </label>
 
 
-<input id="name"
-placeholder="姓名"
-required>
-
+<input required placeholder="请输入您的姓名">
 
 
 
 <label>
+
 手机号
+
 </label>
 
 
-<input id="phone"
-placeholder="手机号"
-required>
-
+<input required placeholder="请输入手机号">
 
 
 
 <label>
+
 邮箱
+
 </label>
 
 
-<input id="email"
-type="email"
-placeholder="邮箱"
-required>
-
+<input placeholder="请输入邮箱">
 
 
 
 <label>
-国家
+
+国家/地区
 
 </label>
 
 
-<select id="country"
-onchange="changeCountry(this.value)">
+<select>
 
 
+<option>
 
-<option value="CN">
 中国
+
 </option>
 
 
-<option value="JP">
+<option>
+
 日本
+
 </option>
 
 
-<option value="KR">
+<option>
+
 韩国
+
 </option>
 
 
-<option value="US">
+<option>
+
 美国
-</option>
 
-
-<option value="GB">
-英国
 </option>
 
 
@@ -509,7 +745,7 @@ onchange="changeCountry(this.value)">
 </label>
 
 
-<select id="event">
+<select>
 
 
 <option>
@@ -542,8 +778,24 @@ VIP Championship
 </form>
 
 
+</div>
+
+
 
 </div>
+
+
+
+
+
+
+
+<footer>
+
+© 2024 WKP BLACK SERIES. All Rights Reserved.
+
+</footer>
+
 
 
 
@@ -553,225 +805,11 @@ VIP Championship
 <script>
 
 
-const i18n={
-
-
-zh:{
-
-
-title:"全球黑金德州扑克赛事平台",
-
-desc:"高端赛事 · 全球玩家",
-
-event:"🔥 即将赛事",
-
-form:"立即报名",
-
-cover:"全球黑金扑克赛事"
-
-
-},
-
-
-
-en:{
-
-
-title:"Global Black Poker Tournament",
-
-desc:"Global Events",
-
-event:"🔥 Events",
-
-form:"Register",
-
-cover:"Global Poker Championship"
-
-
-},
-
-
-
-jp:{
-
-
-title:"グローバルポーカー大会",
-
-desc:"世界大会",
-
-event:"🔥 大会",
-
-form:"参加登録",
-
-cover:"世界ポーカー大会"
-
-
-},
-
-
-
-kr:{
-
-
-title:"글로벌 포커 대회",
-
-desc:"글로벌 이벤트",
-
-event:"🔥 대회",
-
-form:"참가 신청",
-
-cover:"글로벌 포커 챔피언십"
-
-
-}
-
-
-
-};
-
-
-
-
-
-function setLang(lang){
-
-
-let t=i18n[lang];
+function goForm(){
 
 
 document
-.getElementById("eventTitle")
-.innerText=t.event;
-
-
-document
-.getElementById("formTitle")
-.innerText=t.form;
-
-
-document
-.getElementById("coverText")
-.innerText=t.cover;
-
-
-}
-
-
-
-
-
-async function detectIP(){
-
-
-try{
-
-
-let res=
-
-await fetch(
-"https://ipapi.co/json/"
-);
-
-
-let data=
-
-await res.json();
-
-
-
-let c=data.country_code;
-
-
-
-let map={
-
-
-CN:"zh",
-
-TW:"zh",
-
-HK:"zh",
-
-JP:"jp",
-
-KR:"kr",
-
-US:"en",
-
-GB:"en"
-
-
-};
-
-
-
-return map[c]||"en";
-
-
-
-}catch{
-
-
-return "en";
-
-
-}
-
-
-}
-
-
-
-detectIP()
-
-.then(lang=>{
-
-setLang(lang);
-
-});
-
-
-
-
-
-
-function changeCountry(c){
-
-
-let map={
-
-
-CN:"zh",
-
-JP:"jp",
-
-KR:"kr",
-
-US:"en",
-
-GB:"en"
-
-
-};
-
-
-setLang(
-map[c]
-);
-
-
-}
-
-
-
-
-
-function goSignup(){
-
-
-document
-.querySelector(".signup-box")
+.getElementById("signup")
 .scrollIntoView();
 
 
@@ -780,92 +818,34 @@ document
 
 
 
-
-document
-.getElementById("signupForm")
-.addEventListener(
-"submit",
-
-async function(e){
+const text={
 
 
-e.preventDefault();
+zh:"全球黑金德州扑克赛事平台",
 
 
-
-let user={
-
-
-name:
-name.value,
+en:"Global Black Poker Tournament Platform",
 
 
-phone:
-phone.value,
+jp:"グローバルポーカー大会",
 
 
-email:
-email.value,
-
-
-country:
-country.value,
-
-
-event:
-event.value
-
-
-};
-
-
-
-
-await fetch(
-
-"http://localhost:3000/api/signup",
-
-{
-
-
-method:"POST",
-
-
-headers:{
-
-
-"Content-Type":
-
-"application/json"
-
-
-},
-
-
-body:
-
-JSON.stringify(user)
+kr:"글로벌 포커 토너먼트"
 
 
 }
 
-);
 
 
-
-alert(
-"报名成功"
-);
+function setLang(lang){
 
 
+document
+.getElementById("desc")
+.innerText=text[lang];
 
-window.location.href=
-"payment.html";
 
-
-
-});
-
+}
 
 
 </script>
