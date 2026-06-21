@@ -1,138 +1,283 @@
-<!-- 黑金封面 -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WKP Black Poker</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#000;
+      color:white;
+      /* 加上黑金背景图，和你之前的设计一致 */
+      background-image: url("/cover.png");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      padding:15px;
+      border-bottom:1px solid #333;
+      background: rgba(0,0,0,0.8);
+    }
+    .logo{
+      color:gold;
+      font-weight:bold;
+      font-size:20px;
+    }
+    .lang button{
+      margin-left:5px;
+      background:#111;
+      color:white;
+      border:1px solid #555;
+      padding:6px 12px;
+      border-radius:4px;
+      cursor:pointer;
+    }
+    .lang button.active{
+      background:gold;
+      color:#000;
+      border-color:gold;
+    }
+    .hero{
+      text-align:center;
+      padding:60px 15px;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero h1{
+      color:gold;
+      font-size:36px;
+      margin:10px 0;
+    }
+    .hero p{
+      font-size:18px;
+      color:#ccc;
+    }
+    .section{
+      padding:20px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .section h3{
+      color:gold;
+      margin-bottom:15px;
+    }
+    .card{
+      background:rgba(17,17,17,0.9);
+      border:1px solid #443311;
+      padding:15px;
+      margin:10px 0;
+      border-radius:6px;
+      color:gold;
+    }
+    .signup-box{
+      background:rgba(17,17,17,0.9);
+      padding:20px;
+      margin:20px auto;
+      max-width:500px;
+      border-radius:10px;
+      border:1px solid #443311;
+    }
+    .signup-box h2{
+      color:gold;
+      text-align:center;
+      margin-top:0;
+    }
+    label{
+      display:block;
+      margin-top:15px;
+      color:#aaa;
+    }
+    input, select{
+      width:100%;
+      padding:12px;
+      margin-top:8px;
+      background:#000;
+      color:white;
+      border:1px solid #555;
+      border-radius:4px;
+      box-sizing:border-box;
+    }
+    button.submit{
+      width:100%;
+      margin-top:20px;
+      padding:15px;
+      background:gold;
+      border:none;
+      border-radius:6px;
+      font-weight:bold;
+      font-size:16px;
+      cursor:pointer;
+      color:#000;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="logo">WKP BLACK SERIES</div>
+    <div class="lang">
+      <button onclick="setLang('zh')" id="btn-zh">中文</button>
+      <button onclick="setLang('en')" id="btn-en">EN</button>
+      <button onclick="setLang('jp')" id="btn-jp">日本語</button>
+    </div>
+  </div>
+  <div class="hero">
+    <h1 id="title"></h1>
+    <p id="desc"></p>
+  </div>
+  <div class="section">
+    <h3 id="eventTitle"></h3>
+    <div class="card">WKP Black Series</div>
+    <div class="card">VIP Championship</div>
+    <div class="card">Online Tournament</div>
+  </div>
+  <!-- 报名 -->
+  <div class="signup-box">
+    <h2>📝 <span id="formTitle"></span></h2>
+    <form id="signupForm">
+      <label>姓名</label>
+      <input id="name" placeholder="姓名" required>
+      <label>手机号</label>
+      <input id="phone" placeholder="手机号" required>
+      <label>邮箱</label>
+      <input id="email" type="email" placeholder="邮箱" required>
+      <label>国家/地区</label>
+      <select id="country">
+        <option>中国</option>
+        <option>日本</option>
+        <option>台湾</option>
+        <option>美国</option>
+      </select>
+      <label>赛事</label>
+      <select id="event">
+        <option>WKP Black Series</option>
+        <option>VIP Championship</option>
+        <option>Online Tournament</option>
+      </select>
+      <button class="submit" type="submit">提交报名</button>
+    </form>
+  </div>
+  <script>
+    // 🌍 IP自动识别国家语言（全球版）
+    async function detectIPLanguage(){
+      try{
+        let res = await fetch("https://ipapi.co/json/");
+        let data = await res.json();
+        const country = data.country_code;
+        console.log("IP国家:", country);
 
-<div class="cover">
-
-
-<div class="cover-bg"></div>
-
-
-<div class="cover-content">
-
-
-<h1>
-WKP BLACK SERIES
-</h1>
-
-
-<p id="coverText">
-GLOBAL POKER TOURNAMENT
-</p>
-
-
-<button onclick="scrollToSignup()">
-立即报名
-</button>
-
-
-</div>
-
-
-</div>
-<script>
-async function detectByIP() {
-  try {
-    const res = await fetch("https://ipapi.co/json/");
-    const data = await res.json();
-    return data.country_code;
-  } catch (e) {
-    return null;
-  }
-}
-
-function mapCountryToLang(country) {
-  switch (country) {
-    case "CN":
-    case "TW":
-    case "HK":
-      return "zh";
-
-    case "JP":
-      return "jp";
-
-    case "KR":
-      return "kr";
-
-    case "US":
-    case "GB":
-    default:
-      return "en";
-  }
-}
-
-window.onload = async function () {
-  const country = await detectByIP();
-
-  let lang;
-
-  if (country) {
-    lang = mapCountryToLang(country);
-  } else {
-    const browserLang = navigator.language;
-
-    if (browserLang.startsWith("zh")) lang = "zh";
-    else if (browserLang.startsWith("ja")) lang = "jp";
-    else if (browserLang.startsWith("ko")) lang = "kr";
-    else lang = "en";
-  }
-
-  setLang(lang);
-};
-let time = "08:30";
-let date = "2026/06/22";
-body 
-  background: 
-  background-image ("/cover.png");
-  background-size
-  background-positioncenter 
-  background-repeatno-repeat;
-  min-height 
-  // 把时间和日期显示到页面上（假设你有对应的 HTML 元素）
-document.getElementById("current-time").textContent = time;
-document.getElementById("current-date").textContent = date;
-<div class="datetime">
-  <span id="current-date"></span> <span id="current-time"></span>
-</div>
-function updateDateTime() {
-  const now = new Date();
-  // 格式化时间：08:30
-  const timeStr = now.toTimeString().slice(0, 5);
-  // 格式化日期：2024/06/22
-  const dateStr = now.toLocaleDateString("zh-CN", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  }).replace(/\//g, "/");
-  
-  document.getElementById("current-time").textContent = timeStr;
-  document.getElementById("current-date").textContent = dateStr;
-}
-
-// 页面加载时执行一次
-updateDateTime();
-// 每分钟更新一次
-setInterval(updateDateTime, 60000);
-// 在你的 payI18n 里加语言包
-const payI18n = {
-  zh: {
-    // ...其他文案
-    datetime: "当前时间："
-  },
-  en: {
-    // ...其他文案
-    datetime: "Current Time: "
-  },
-  jp: {
-    // ...其他文案
-    datetime: "現在時刻："
-  }
-};
-
-// 在 setPayLang 里更新
-function setPayLang(lang) {
-  // ...原有逻辑
-  document.getElementById("datetime-label").textContent = payI18n[lang].datetime;
-}
-<div class="datetime">
-  <span id="datetime-label"></span>
-  <span id="current-date"></span> <span id="current-time"></span>
-</div>
+        // 国家对应语言
+        const languageMap = {
+          // 中文区域
+          CN:"zh", TW:"zh", HK:"zh", MO:"zh",
+          // 日本
+          JP:"jp",
+          // 韩国
+          KR:"kr",
+          // 英语国家
+          US:"en", GB:"en", CA:"en", AU:"en", NZ:"en", IE:"en", SG:"en", IN:"en", PH:"en", ZA:"en",
+          // 欧洲
+          DE:"de", FR:"fr", ES:"es", IT:"it", PT:"pt", NL:"nl", BE:"nl", CH:"de", AT:"de", SE:"sv", NO:"no", DK:"da", FI:"fi", PL:"pl", CZ:"cs", GR:"el",
+          // 东南亚
+          TH:"th", VN:"vi", MY:"ms", ID:"id", KH:"km",
+          // 中东
+          AE:"ar", SA:"ar", QA:"ar", TR:"tr",
+          // 俄罗斯
+          RU:"ru",
+          // 巴西
+          BR:"pt",
+          // 墨西哥
+          MX:"es",
+          // 默认
+          default:"en"
+        };
+        return languageMap[country] || languageMap.default;
+      }catch(error){
+        console.log("IP检测失败", error);
+        // 失败使用浏览器语言
+        let lang = navigator.language.toLowerCase();
+        if(lang.includes("zh")) return "zh";
+        if(lang.includes("ja")) return "jp";
+        if(lang.includes("ko")) return "kr";
+        return "en";
+      }
+    }
+    // 多语言
+    const i18n={
+      zh:{
+        title:"全球黑金德州扑克赛事平台",
+        desc:"高端赛事 · 全球玩家 · VIP系统",
+        event:"🔥 即将赛事",
+        form:"立即报名"
+      },
+      en:{
+        title:"Global Black Poker Tournament",
+        desc:"Global Events · VIP System",
+        event:"🔥 Events",
+        form:"Register"
+      },
+      jp:{
+        title:"グローバルポーカー大会",
+        desc:"世界大会 · VIPシステム",
+        event:"🔥 大会",
+        form:"参加登録"
+      }
+    };
+    function setLang(lang){
+      let t = i18n[lang] || i18n.zh;
+      document.getElementById("title").innerText = t.title;
+      document.getElementById("desc").innerText = t.desc;
+      document.getElementById("eventTitle").innerText = t.event;
+      document.getElementById("formTitle").innerText = t.form;
+      // 切换按钮高亮
+      document.querySelectorAll(".lang button").forEach(btn=>{
+        btn.classList.remove("active");
+      });
+      document.getElementById(`btn-${lang}`).classList.add("active");
+      // 保存语言到本地
+      localStorage.setItem("siteLang", lang);
+    }
+    // 页面加载时自动检测语言
+    (async ()=>{
+      const savedLang = localStorage.getItem("siteLang");
+      if(savedLang){
+        setLang(savedLang);
+      }else{
+        const detectedLang = await detectIPLanguage();
+        setLang(detectedLang);
+      }
+    })();
+    // 提交报名
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let user = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        country: document.getElementById("country").value,
+        event: document.getElementById("event").value,
+        time: new Date().toLocaleString()
+      };
+      console.log(user);
+      // 发送后台（可替换为你的接口地址）
+      fetch("http://localhost:3000/api/signup", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(user)
+      }).then(res=>res.json())
+        .then(data=>{
+          alert("报名成功，正在进入支付页面");
+          window.location.href = "payment.html?orderId=" + data.orderId;
+        })
+        .catch(err=>{
+          alert("报名失败，请稍后重试");
+          console.error(err);
+        });
+    });
+  </script>
+</body>
+</html>
