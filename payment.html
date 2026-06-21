@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USDT Payment - WKP Black Poker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding:15px 0;
+    }
+    .payment-card {
+      background: #111;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid #333;
+    }
+    .lang-switch{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-bottom:20px;
+    }
+    .lang-switch button{
+      background:#222;
+      color:#fff;
+      border:1px solid #666;
+      padding:5px 10px;
+      border-radius:4px;
+      cursor:pointer;
+    }
+    .lang-switch button.active{
+      background:gold;
+      color:#000;
+      border-color:gold;
+    }
+    h1 {
+      color: gold;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .order-info {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .order-info p {
+      margin: 0.5rem 0;
+      color: #ccc;
+    }
+    .address-box {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .address-label {
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .address {
+      font-family: monospace;
+      word-break: break-all;
+      color: #22c55e;
+      background: #000;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin: 0.5rem 0;
+    }
+    .copy-btn {
+      background: gold;
+      color: #000;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+    .qrcode-box {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .qrcode-box img {
+      width: 180px;
+      height: 180px;
+      background: #fff;
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .qrcode-tip {
+      color: #999;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    .tip {
+      color: #999;
+      font-size: 0.85rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .status {
+      text-align: center;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #1a1a1a;
+    }
+    .pending {
+      color: #f59e0b;
+    }
+    .success {
+      color: #22c55e;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-card">
+    <!-- 语言切换按钮 -->
+    <div class="lang-switch">
+      <button onclick="setPayLang('zh')" id="btn-zh" class="active">中文</button>
+      <button onclick="setPayLang('en')" id="btn-en">EN</button>
+      <button onclick="setPayLang('jp')" id="btn-jp">日本語</button>
+    </div>
+
+    <h1 id="pay-title">💰 USDT 支付</h1>
+    <div class="order-info">
+      <p><span id="text-orderid">订单号</span>：<span id="orderId">WKP-20260621-001</span></p>
+      <p><span id="text-amount">支付金额</span>：<span id="amount">50.00</span> USDT</p>
+      <p><span id="text-chain">链类型</span>：TRC20（<span id="text-chaintip">手续费低，推荐</span>）</p>
+    </div>
+    <div class="address-box">
+      <div class="address-label" id="text-addresslabel">收款地址（TRC20）：</div>
+      <div class="address" id="usdtAddr">TC7TFRfTrhEk85dXeyfghM5hqFq9HRXabU</div>
+      <button class="copy-btn" onclick="copyAddress()" id="text-copybtn">复制地址</button>
+    </div>
+
+    <!-- 二维码区域 -->
+    <div class="qrcode-box">
+      <!-- 替换成你的二维码图片地址，本地就写 usdt-qrcode.png -->
+      <img src="usdt-qrcode.png" alt="USDT支付二维码" />
+      <div class="qrcode-tip" id="text-qrtip">扫码直接支付 USDT（TRC20）</div>
+    </div>
+
+    <div class="tip" id="text-tip">
+      请向以上地址转账指定金额，转账完成后系统将自动确认。
+    </div>
+    <div class="status pending" id="paymentStatus">
+      ⏳ <span id="text-waitpay">等待支付确认...</span>
+    </div>
+  </div>
+
+  <script>
+    // 多语言文案
+    const payI18n = {
+      zh:{
+        title:"💰 USDT 支付",
+        orderid:"订单号",
+        amount:"支付金额",
+        chain:"链类型",
+        chaintip:"手续费低，推荐",
+        addresslabel:"收款地址（TRC20）：",
+        copybtn:"复制地址",
+        qrtip:"扫码直接支付 USDT（TRC20）",
+        tip:"请向以上地址转账指定金额，转账完成后系统将自动确认。",
+        waitpay:"等待支付确认...",
+        copyalert:"地址已复制到剪贴板！",
+        success:"✅ 支付成功！3秒返回首页"
+      },
+      en:{
+        title:"💰 USDT Payment",
+        orderid:"Order ID",
+        amount:"Amount",
+        chain:"Chain",
+        chaintip:"Low fee recommended",
+        addresslabel:"Receive Address(TRC20):",
+        copybtn:"Copy Address",
+        qrtip:"Scan QR to pay USDT(TRC20)",
+        tip:"Please transfer exact amount to this address, system will auto confirm.",
+        waitpay:"Waiting payment confirmation...",
+        copyalert:"Address copied to clipboard!",
+        success:"✅ Payment Success! Back to home in 3s"
+      },
+      jp:{
+        title:"💰 USDT お支払い",
+        orderid:"注文番号",
+        amount:"お支払金額",
+        chain:"チェーン",
+        chaintip:"手数料安い推奨",
+        addresslabel:"受取アドレス(TRC20)：",
+        copybtn:"アドレスコピー",
+        qrtip:"QRコード読み取りでUSDT送金(TRC20)",
+        tip:"記載金額をアドレスへ送金後、自動確認されます。",
+        waitpay:"お支払い確認待ち...",
+        copyalert:"アドレスをクリップボードにコピーしました",
+        success:"✅ お支払い完了！3秒後ホームへ戻る"
+      }
+    };
+
+    // 切换页面语言
+    function setPayLang(lang){
+      const t = payI18n[lang];
+      // 更新所有文字
+      document.getElementById("pay-title").innerText = t.title;
+      document.getElementById("text-orderid").innerText = t.orderid;
+      document.getElementById("text-amount").innerText = t.amount;
+      document.getElementById("text-chain").innerText = t.chain;
+      document.getElementById("text-chaintip").innerText = t.chaintip;
+      document.getElementById("text-addresslabel").innerText = t.addresslabel;
+      document.getElementById("text-copybtn").innerText = t.copybtn;
+      document.getElementById("text-qrtip").innerText = t.qrtip;
+      document.getElementById("text-tip").innerText = t.tip;
+      document.getElementById("text-waitpay").innerText = t.waitpay;
+      // 按钮激活样式
+      document.querySelectorAll(".lang-switch button").forEach(btn=>{
+        btn.classList.remove("active");
+      })
+      document.getElementById(`btn-${lang}`).classList.add("active");
+      // 存储语言到本地，和首页互通
+      localStorage.setItem("siteLang", lang);
+    }
+
+    // 复制地址功能
+    function copyAddress() {
+      const addr = document.getElementById('usdtAddr').textContent;
+      const currentLang = localStorage.getItem("siteLang") || "zh";
+      const alertText = payI18n[currentLang].copyalert;
+      navigator.clipboard.writeText(addr).then(() => {
+        alert(alertText);
+      });
+    }
+
+    // 读取首页保存的语言，自动匹配
+    window.onload = function(){
+      const saveLang = localStorage.getItem("siteLang") || "zh";
+      setPayLang(saveLang);
+    }
+
+    // 轮询查询支付状态（实际对接区块链API）
+    const checkInterval = setInterval(() => {
+      const isPaid = Math.random() > 0.8;
+      const currentLang = localStorage.getItem("siteLang") || "zh";
+      if (isPaid) {
+        document.getElementById('paymentStatus').innerHTML = payI18n[currentLang].success;
+        document.getElementById('paymentStatus').classList.remove('pending');
+        document.getElementById('paymentStatus').classList.add('success');
+        clearInterval(checkInterval);
+        setTimeout(() => {
+          window.location.href = '/index.html';
+        }, 3000);
+      }
+    }, 5000);
+  </script>
+</body>
+</html>
